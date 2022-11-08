@@ -17,3 +17,4 @@
       5° - Execute o comando no diretório raíz (onde está localizada a pasta "src"): "npm i".
       6° - Espere o interpretador instalar todos os arquivos necessários para rodar o projeto.
       7° - Execute o comando no mesmo local: "npm run dev".
+      8° - Aguarde a abertura do servidor Backend no seu terminal para começar a testar através de softwares como Insomnia ou Postman.
