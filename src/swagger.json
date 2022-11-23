@@ -2,10 +2,10 @@
   "swagger": "2.0",
   "info": {
     "version": "1.0.0",
-    "title": "REST API",
-    "description": ""
+    "title": "Sistema simples de transações bancárias",
+    "description": "Uma API RESTful simples que faz todas as suas lógicas com pouco uso de bibliotecas."
   },
-  "host": "localhost:3000",
+  "host": "localhost:8000",
   "basePath": "/",
   "tags": [],
   "schemes": [
@@ -17,10 +17,11 @@
     "/contas": {
       "get": {
         "tags": [],
-        "description": "",
+        "description": "Exibe a lista de contas bancárias registradas",
         "parameters": [
           {
             "name": "senha_banco",
+            "description": "Senha do banco para uso da rota que deve ser passada como query. (a ideia é que a listagem das contas seja acessível apenas para um funcionário encarregado do banco)",
             "in": "query",
             "type": "string"
           }
@@ -36,31 +37,32 @@
       },
       "post": {
         "tags": [],
-        "description": "",
+        "description": "Rota que permite a criação de contas por parte do usuário",
         "parameters": [
           {
             "name": "obj",
+            "description": "Corpo da requisição para esta rota. Abaixo você vê um exemplo de um objeto JSON na estrutura correta que deverá ser enviado para esta rota para que ela funcione devidamente",
             "in": "body",
             "schema": {
               "type": "object",
               "properties": {
                 "nome": {
-                  "example": "any"
+                  "example": "Maria"
                 },
                 "cpf": {
-                  "example": "any"
+                  "example": "721.432.432-25"
                 },
                 "data_nascimento": {
-                  "example": "any"
+                  "example": "aaaa-mm-dd"
                 },
                 "telefone": {
-                  "example": "any"
+                  "example": "837284739"
                 },
                 "email": {
-                  "example": "any"
+                  "example": "maria@gmail.com"
                 },
                 "senha": {
-                  "example": "any"
+                  "example": "maria123"
                 }
               }
             }
@@ -79,37 +81,39 @@
     "/contas/{numeroConta}/usuario": {
       "put": {
         "tags": [],
-        "description": "",
+        "description": "Rota que permite a edição das informações de uma conta bancária por parte do usuário",
         "parameters": [
           {
             "name": "numeroConta",
+            "description": "Número da conta que deve ser passado como parâmetro de caminho na rota",
             "in": "path",
             "required": true,
             "type": "string"
           },
           {
             "name": "obj",
+            "description": "Corpo da requisição para esta rota. Abaixo você vê um exemplo de um objeto JSON na estrutura correta que deverá ser enviado para esta rota para que ela funcione devidamente",
             "in": "body",
             "schema": {
               "type": "object",
               "properties": {
                 "nome": {
-                  "example": "any"
+                  "example": "Mariazinha"
                 },
                 "cpf": {
-                  "example": "any"
+                  "example": "721.432.432-25"
                 },
                 "data_nascimento": {
-                  "example": "any"
+                  "example": "aaaa-mm-dd"
                 },
                 "telefone": {
-                  "example": "any"
+                  "example": "837284739"
                 },
                 "email": {
-                  "example": "any"
+                  "example": "mariazinha@gmail.com"
                 },
                 "senha": {
-                  "example": "any"
+                  "example": "mariazinha123"
                 }
               }
             }
@@ -128,10 +132,11 @@
     "/contas/{numeroConta}": {
       "delete": {
         "tags": [],
-        "description": "",
+        "description": "Rota que permite a exclusão de uma conta bancária por parte de um usuário",
         "parameters": [
           {
             "name": "numeroConta",
+            "description": "Número da conta que deve ser passado como parâmetro de caminho na rota",
             "in": "path",
             "required": true,
             "type": "string"
@@ -150,19 +155,20 @@
     "/transacoes/depositar": {
       "post": {
         "tags": [],
-        "description": "",
+        "description": "Rota que permite o depósito de valores em uma conta bancária. Dessa vez os identificadores da conta são passados no corpo da requisição.",
         "parameters": [
           {
             "name": "obj",
+            "description": "Corpo da requisição para esta rota. Abaixo você vê um exemplo de um objeto JSON na estrutura correta que deverá ser enviado para esta rota para que ela funcione devidamente",
             "in": "body",
             "schema": {
               "type": "object",
               "properties": {
                 "numero_conta": {
-                  "example": "any"
+                  "example": "(id da conta bancária)"
                 },
                 "valor": {
-                  "example": "any"
+                  "example": "200"
                 }
               }
             }
@@ -181,22 +187,23 @@
     "/transacoes/sacar": {
       "post": {
         "tags": [],
-        "description": "",
+        "description": "Rota que permite o saque de valores em uma conta bancária.",
         "parameters": [
           {
             "name": "obj",
+            "description": "Corpo da requisição para esta rota. Abaixo você vê um exemplo de um objeto JSON na estrutura correta que deverá ser enviado para esta rota para que ela funcione devidamente",
             "in": "body",
             "schema": {
               "type": "object",
               "properties": {
                 "numero_conta": {
-                  "example": "any"
+                  "example": "(id da conta)"
                 },
                 "valor": {
-                  "example": "any"
+                  "example": "300"
                 },
                 "senha": {
-                  "example": "any"
+                  "example": "maria123"
                 }
               }
             }
@@ -215,25 +222,26 @@
     "/transacoes/transferir": {
       "post": {
         "tags": [],
-        "description": "",
+        "description": "Rota que permite a transferência de valores de uma conta bancária para outra.",
         "parameters": [
           {
             "name": "obj",
+            "description": "Corpo da requisição para esta rota. Abaixo você vê um exemplo de um objeto JSON na estrutura correta que deverá ser enviado para esta rota para que ela funcione devidamente",
             "in": "body",
             "schema": {
               "type": "object",
               "properties": {
                 "numero_conta_origem": {
-                  "example": "any"
+                  "example": "(id da conta origem)"
                 },
                 "numero_conta_destino": {
-                  "example": "any"
+                  "example": "(id da conta destino)"
                 },
                 "valor": {
-                  "example": "any"
+                  "example": "400"
                 },
                 "senha": {
-                  "example": "any"
+                  "example": "maria123"
                 }
               }
             }
@@ -255,15 +263,17 @@
     "/contas/saldo": {
       "get": {
         "tags": [],
-        "description": "",
+        "description": "Rota que permite o acesso ao valor do saldo de uma conta bancária.",
         "parameters": [
           {
             "name": "numero_conta",
+            "description": "Número da conta que deve ser passado como parâmetro de caminho na rota",
             "in": "query",
             "type": "string"
           },
           {
             "name": "senha",
+            "description": "Senha da conta que deseja ver o saldo, passado como query",
             "in": "query",
             "type": "string"
           }
@@ -281,15 +291,17 @@
     "/contas/extrato": {
       "get": {
         "tags": [],
-        "description": "",
+        "description": "Rota que permite o acesso a um relatório com todas as transações efetuadas de uma conta bancária.",
         "parameters": [
           {
             "name": "numero_conta",
+            "description": "Número da conta que deve ser passado como parâmetro de caminho na rota",
             "in": "query",
             "type": "string"
           },
           {
             "name": "senha",
+            "description": "Senha da conta que deseja ver o extrato, passado como query",
             "in": "query",
             "type": "string"
           }

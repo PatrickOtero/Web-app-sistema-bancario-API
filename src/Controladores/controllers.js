@@ -114,6 +114,9 @@ function listarContasBancarias(req, res) {
   if (!senha_banco) return res.status(401).json({mensagem: "Campo query 'senha_banco' na URL é obrigatório para autenticação via senha, acesso negado"});
   if (senha_banco !== banco.senha) return res.status(401).json({mensagem: "A senha inserida está incorreta, acesso negado" });
 
+  if (!contas.length) {
+    res.status(200).json({mensagem: "Não há contas registradas no banco."})
+  }
   res.status(200).json(contas);
 }
 
@@ -147,7 +150,7 @@ function criarContaBancaria(req, res) {
       },
     });
 
-    res.status(204).send();
+    res.status(201).json({mensagem: "Conta criada com sucesso."});
 }
 
 function atualizarContaBancaria (req, res) {
@@ -180,7 +183,7 @@ function atualizarContaBancaria (req, res) {
   oUsuario.usuario.email = email;
   oUsuario.usuario.senha = senha;
 
-  res.status(204).send();
+  res.status(201).json({mensagem: "Conta editada com sucesso."});
 }
 
 function excluirContaBancaria (req, res) {
@@ -195,7 +198,7 @@ function excluirContaBancaria (req, res) {
 
   contas.splice(indice, 1);
 
-  res.status(204).send();
+  res.status(201).json({mensagem: "Conta excluida com sucesso."});
 }
 
 function depositar (req, res) {
@@ -218,7 +221,7 @@ function depositar (req, res) {
     valor,
   });
 
-  res.status(204).send();
+  res.status(201).json({mensagem: "Depósito efetuado com sucesso."});
 }
 
 function sacar (req, res) {
@@ -246,7 +249,7 @@ function sacar (req, res) {
     valor,
   });
 
-res.status(204).send();
+  res.status(201).json({mensagem: "Saque efetuado com sucesso."});
 }
 
 function transferir (req, res) {
@@ -284,7 +287,7 @@ function transferir (req, res) {
     valor,
   });
 
-  res.status(204).send();
+  res.status(201).json({mensagem: "transferência efetuada com sucesso."});
 }
 
 function consultarSaldo (req, res) {
