@@ -1,13 +1,5 @@
 # API RESTfull para um sistema bancário
 
-## Back-end para um sistema bancário cuja interface de usuário (front-end) ainda não está pronta. Este aplicativo web terá as seguintes funcionalidades:
-- Criar, listar, editar e excluir contas bancárias
-- Depositar e sacar valores de uma conta bancária
-- Transferir valores entre contas bancárias
-- Consultar saldo de uma conta bancária
-- Emitir extrato bancário de uma conta
-
-
  #### - O que precisa ser feito para que a api funcione localmente?
  
       1° - Baixe a engine (motor) que interpretará as funcionalidades das dependências em javascript, o Node, através deste link: https://nodejs.org/en/download/
