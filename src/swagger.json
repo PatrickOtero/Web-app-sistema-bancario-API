@@ -6,7 +6,7 @@
     "description": "Uma API RESTful simples que faz todas as suas lógicas com pouco uso de bibliotecas."
   },
   "host": "localhost:8000",
-  "basePath": "/",
+  "basePath": "/docs",
   "tags": [],
   "schemes": [
     "http"
